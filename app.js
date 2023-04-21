@@ -30,7 +30,7 @@ function searchWeatherByCity(city) {
         const hour = new Date(localTimestamp).getHours();
         const minute = new Date(localTimestamp).getMinutes();
         cityName.innerHTML = data.name;
-        cityTime.innerHTML = `${hour > 12 ? hour - 12 : hour}:${minute < 10 ? `0${minute}`: minute }`;
+        cityTime.innerHTML = `${hour > 12 ? hour - 12 : hour}:${minute < 10 ? `0${minute}`: minute } ${hour > 12 ? `pm` : `am`}`;
         cityTemp.innerHTML = `${Math.ceil(data.main.temp - 273)}°C `;
         description.innerHTML = data.weather[0].description;
         image.setAttribute(
@@ -55,36 +55,35 @@ let currentLocation;
 
 search.addEventListener("click", () => {
   searchWeatherByCity(input.value);
-  console.log(input.value);
 });
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(showPosition);
-} else {
-  alert("Geolocation is not supported by this browser.");
-}
+// if (navigator.geolocation) {
+//   navigator.geolocation.getCurrentPosition(showPosition);
+// } else {
+//   alert("Geolocation is not supported by this browser.");
+// }
 
-function showPosition(position) {
-  var lat = position.coords.latitude;
-  var long = position.coords.longitude;
+// function showPosition(position) {
+//   var lat = position.coords.latitude;
+//   var long = position.coords.longitude;
 
-  fetch(
-    `https://api.api-ninjas.com/v1/reversegeocoding?lat=${lat}&lon=${long}`,
-    {
-      method: "GET",
-      headers: {
-        "X-Api-Key": "NYFPRQfFwXnZc+m9MLc5sw==h1wj4MJtYejsXY0v",
-        "Content-Type": "application/json",
-      },
-    }
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      currentLocation = response[0].name;
-      console.log(currentLocation);
-    })
-    .catch((error) => console.error("Error: ", error));
-}
+//   fetch(
+//     `https://api.api-ninjas.com/v1/reversegeocoding?lat=${lat}&lon=${long}`,
+//     {
+//       method: "GET",
+//       headers: {
+//         "X-Api-Key": "NYFPRQfFwXnZc+m9MLc5sw==h1wj4MJtYejsXY0v",
+//         "Content-Type": "application/json",
+//       },
+//     }
+//   )
+//     .then((response) => response.json())
+//     .then((response) => {
+//       currentLocation = response[0].name;
+//       console.log(currentLocation);
+//     })
+//     .catch((error) => console.error("Error: ", error));
+// }
 
 // setTimeout(() => searchWeatherByCity(currentLocation), 5000)
 
