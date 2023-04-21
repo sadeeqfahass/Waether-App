@@ -57,6 +57,13 @@ search.addEventListener("click", () => {
   searchWeatherByCity(input.value);
 });
 
+window.addEventListener("keypress", function(e) {
+    if(e.key === "Enter") {
+        e.preventDefault();
+        searchWeatherByCity(input.value);
+    }
+})
+
 // if (navigator.geolocation) {
 //   navigator.geolocation.getCurrentPosition(showPosition);
 // } else {
