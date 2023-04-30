@@ -13,16 +13,13 @@ const search = document.querySelector(".icon");
 
 const apiKey = "832e28020af9958be5dd112335ae7a66";
 
-let dataArr;
-
-
-
 
 function searchWeatherByCity(city) {
   const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      console.log(data)
         const timezoneOffset = data.timezone;
         const now = new Date();
         const utcTimestamp = now.getTime();
@@ -64,34 +61,7 @@ window.addEventListener("keypress", function(e) {
     }
 })
 
-// if (navigator.geolocation) {
-//   navigator.geolocation.getCurrentPosition(showPosition);
-// } else {
-//   alert("Geolocation is not supported by this browser.");
-// }
+searchWeatherByCity("Abuja")
 
-// function showPosition(position) {
-//   var lat = position.coords.latitude;
-//   var long = position.coords.longitude;
-
-//   fetch(
-//     `https://api.api-ninjas.com/v1/reversegeocoding?lat=${lat}&lon=${long}`,
-//     {
-//       method: "GET",
-//       headers: {
-//         "X-Api-Key": "NYFPRQfFwXnZc+m9MLc5sw==h1wj4MJtYejsXY0v",
-//         "Content-Type": "application/json",
-//       },
-//     }
-//   )
-//     .then((response) => response.json())
-//     .then((response) => {
-//       currentLocation = response[0].name;
-//       console.log(currentLocation);
-//     })
-//     .catch((error) => console.error("Error: ", error));
-// }
-
-// setTimeout(() => searchWeatherByCity(currentLocation), 5000)
 
 
