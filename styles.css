@@ -46,9 +46,13 @@ body {
 
 .left .city .fa-location-dot {
   font-size: 1rem;
-  align-self: center;
   color: #fff;
   margin-right: .5rem;
+}
+
+.left .city .country {
+  font-size: 1rem;
+  color: #fff;
 }
 
 .left .city-time {
