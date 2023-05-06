@@ -1,4 +1,5 @@
 const cityName = document.querySelector(".city-name");
+const country = document.querySelector(".country");
 const cityTime = document.querySelector(".city-time");
 const cityTemp = document.querySelector(".temp");
 const description = document.querySelector(".desc");
@@ -15,7 +16,7 @@ const apiKey = "832e28020af9958be5dd112335ae7a66";
 
 
 function searchWeatherByCity(city) {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
@@ -27,8 +28,9 @@ function searchWeatherByCity(city) {
         const hour = new Date(localTimestamp).getHours();
         const minute = new Date(localTimestamp).getMinutes();
         cityName.innerHTML = data.name;
+        country.innerHTML = data.sys.country;
         cityTime.innerHTML = `${hour > 12 ? hour - 12 : hour}:${minute < 10 ? `0${minute}`: minute } ${hour > 12 ? `pm` : `am`}`;
-        cityTemp.innerHTML = `${Math.ceil(data.main.temp - 273)}°C `;
+        cityTemp.innerHTML = `${Math.floor(data.main.temp)}°C `;
         description.innerHTML = data.weather[0].description;
         image.setAttribute(
           "src",
@@ -38,8 +40,8 @@ function searchWeatherByCity(city) {
           "src",
           `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
         );
-        tempMax.innerHTML = `${Math.ceil(data.main.temp_max - 273)}°C `;
-        tempMin.innerHTML = `${Math.ceil(data.main.temp_min - 273)}°C `;
+        tempMax.innerHTML = `High: ${Math.floor(data.main.temp_max) }°C `;
+        tempMin.innerHTML = `Low: ${Math.floor(data.main.temp_min) }°C `;
         windSpeed.innerHTML = `Wind: ${data.wind.speed} mph`;
         visibility.innerHTML = `Visibility: ${data.visibility / 1000} km`;
         
